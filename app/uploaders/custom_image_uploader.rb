@@ -1,8 +1,8 @@
 class CustomImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
-  include Piet::CarrierWaveExtension
+  include CarrierWave::MiniMagick
+  #include Piet::CarrierWaveExtension
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog
@@ -13,18 +13,7 @@ class CustomImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-
-  #process :resize_to_limit => [1024, 1024]
-  # Piet optimization
-  process :optimize
-
-  # My piet optimize recipe
-#  def optimize
-#    manipulate! do |img|
-#      Piet.optimize(current_path)
-#      img
-#    end
-#  end
+  process :resize_to_limit => [500, nil]
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
